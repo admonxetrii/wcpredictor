@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  wcpredictor:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: wcpredictor_app
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    # If deploying locally or via source code, this will use your .env file
+    env_file:
+      - stack.env
+
+  cron:
+    image: curlimages/curl:latest
+    container_name: wcpredictor_cron
+    restart: unless-stopped
+    env_file:
+      - stack.env
+    # This runs a loop that curls the endpoint, then sleeps for 15 minutes (900 seconds)
+    command: ["/bin/sh", "-c", "while true; do curl -s -H \"Authorization: Bearer $$CRON_SECRET\" http://wcpredictor:3000/api/cron/match-reminders; sleep 900; done"]
+    depends_on:
+      - wcpredictor
