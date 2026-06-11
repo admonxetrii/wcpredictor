@@ -18,7 +18,7 @@ When working on this project, adhere to the following agent roles depending on t
 **Deliverables:**
 * **Core Feature Scope:**
     * Immersive, animated landing page.
-    * Registration flow requiring a Cedargate email and a one-time "Final Tournament Winner" prediction.
+    * Registration flow requiring any Google SSO login for first time and a one-time "Final Tournament Winner" prediction.
     * Admin dashboard to approve/activate users (based on manual fee payment).
     * Interactive dashboard for predictions, locked 1 hour before kickoff based on precise timezone handling (accounting for both Nepal and US local times).
     * Automated point calculation engine and global leaderboard.
